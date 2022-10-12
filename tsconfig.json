@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5",
+    "outDir": "./lib"
+  },
+  "include": [
+    "src/*.ts"
+  ],
+  // 컴파일 제외
+  "exclude": [
+    "node_modules",
+    "lib",
+  ],
+}
