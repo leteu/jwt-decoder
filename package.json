@@ -8,12 +8,11 @@
   "scripts": {
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "publish": "npm run build && npm publish",
-    "lint": "npm run lint"
+    "publish": "npm run build && npm publish --access=public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leteu/jwt-decoder.git"
+    "url": "git://github.com/leteu/jwt-decoder.git"
   },
   "devDependencies": {
     "@types/node": "^14.14.20",
