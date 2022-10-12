@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "noImplicitAny": false,
-    "noEmitOnError": true,
-    "removeComments": false,
-    "sourceMap": true,
     "target": "es5",
-    "outDir": "./lib"
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "./lib",
+    "strict": true
   },
   "include": [
     "src/*.ts"

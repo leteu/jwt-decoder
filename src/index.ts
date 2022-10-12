@@ -1,6 +1,6 @@
-import * as buffer from 'buffer'
+import { Buffer } from 'buffer'
 
-function decodeToken<T>(token: string): T {
+function decodeToken<T>(token: string): T | undefined {
   let base64Url: string;
 
   if (token.match(/^[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*$/)) {
@@ -13,7 +13,7 @@ function decodeToken<T>(token: string): T {
   }
 
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  const JSONToken = JSON.parse(decodeURIComponent(buffer.Buffer.from(base64, 'base64').toString()));
+  const JSONToken = JSON.parse(decodeURIComponent(Buffer.from(base64, 'base64').toString()));
 
   return JSONToken;
 };
