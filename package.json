@@ -8,7 +8,8 @@
   "scripts": {
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "publish": "npm run build && npm publish --access=public"
+    "publish": "npm run build && npm publish --access=public",
+    "lint": "eslint --ext '.js,.ts,.tsx' ."
   },
   "repository": {
     "type": "git",
