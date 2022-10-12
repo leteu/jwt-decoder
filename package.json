@@ -1,5 +1,5 @@
 {
-  "name": "jwt-decoder",
+  "name": "@leteu/jwt-decoder",
   "version": "1.0.0",
   "description": "JSON Web Tokens decoder",
   "author": "leteu",
@@ -21,6 +21,9 @@
     "@typescript-eslint/parser": "^4.8.1",
     "eslint": "^7.13.0",
     "typescript": "^4.0.5"
+  },
+  "dependencies": {
+    "buffer": "^6.0.3"
   },
   "keywords": [
     "jwt",
