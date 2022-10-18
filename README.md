@@ -1,10 +1,29 @@
 # jwt-decoder
 JSON Web Tokens decoder
 
+<!-- TOC -->
+
+- [JWT Decoder](#jwt-decoder)
+  - [Download](#download)
+  - [Usage](#usage)
+  - [API](#api)
+    - [decodeToken](#decodetoken)
+    - [Argument](#argument)
+  - [Example](#example)
+    - [On Javascript](#on-javascript)
+    - [On Typescript](#on-typescript)
+
+<!-- /TOC -->
+
 ## Download
 Using npm:
 ```shell
 $ npm i @leteu/jwt-decoder
+```
+
+Using yarn:
+```shell
+$ yarn add @leteu/jwt-decoder
 ```
 
 ## Usage

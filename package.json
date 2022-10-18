@@ -1,6 +1,6 @@
 {
   "name": "@leteu/jwt-decoder",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "JSON Web Tokens decoder",
   "author": "leteu",
   "license": "MIT",
