@@ -1,6 +1,6 @@
 import { Buffer } from 'buffer'
 
-function decodeToken<T>(token: string): T | undefined {
+function decodeToken<T = unknown>(token: string): T | undefined {
   let base64Url: string;
 
   if (token.match(/^[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*\.[A-Za-z0-9-_]*$/)) {
