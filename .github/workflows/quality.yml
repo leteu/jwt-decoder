@@ -1,0 +1,47 @@
+name: Code Quality
+
+env:
+  cacheId: '4' # increment to expire the cache
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-18.04
+    name: Linting
+    steps:
+      - name: Checkout blog
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.15.0'
+
+        # GitHub recommends not caching node_modules but rather
+        # .npm because it can break across Node versions and
+        #  won't work with npm ci.
+      - name: Cache node modules
+        uses: actions/cache@v1
+        id: npm-cache
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ env.cacheId }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.cacheId }}-
+
+      - name: Install dependencies
+        run: |
+          yarn
+
+      - name: Check style
+        run: |
+          yarn run prettier
+
+      - name: LINTing
+        run: |
+          yarn run lint
