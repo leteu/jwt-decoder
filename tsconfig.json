@@ -6,7 +6,7 @@
     "outDir": "./lib",
     "strict": true
   },
-  "include": ["src/*.ts"],
+  "include": ["src/*.ts", "test/*.test.ts"],
   // 컴파일 제외
   "exclude": ["node_modules", "lib"]
 }

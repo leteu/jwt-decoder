@@ -12,14 +12,15 @@
     "publish": "npm run build && npm publish --access=public",
     "lint": "eslint --ext .js,.ts --color .",
     "format": "prettier --write \"**/*.{ts,md,json}\" --ignore-path .gitignore",
-    "prettier": "prettier --check \"**/*.{ts,md,json}\" --ignore-path .gitignore"
+    "prettier": "prettier --check \"**/*.{ts,md,json}\" --ignore-path .gitignore",
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leteu/jwt-decoder.git"
   },
   "devDependencies": {
-    "@types/node": "^14.14.20",
+    "@types/node": "^14.18.63",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
     "eslint": "8.26.0",
@@ -27,7 +28,8 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.5.1",
-    "typescript": "^4.0.5"
+    "typescript": "^4.0.5",
+    "vitest": "^1.0.1"
   },
   "dependencies": {
     "buffer": "^6.0.3"
