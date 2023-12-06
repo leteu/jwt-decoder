@@ -14,7 +14,7 @@ function decodeToken<T = unknown>(token: string): T {
 
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
   const JSONToken = JSON.parse(
-    decodeURIComponent(Buffer.from(base64, 'base64').toString()),
+    Buffer.from(base64, 'base64').toString()
   )
 
   return JSONToken
