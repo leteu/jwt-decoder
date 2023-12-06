@@ -1,4 +1,4 @@
-name: Code Quality
+name: Code Test
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-18.04
-    name: Linting
+    name: Testing
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,10 +27,6 @@ jobs:
         run: |
           pnpm i
 
-      - name: Check style
+      - name: Test
         run: |
-          pnpm prettier
-
-      - name: LINTing
-        run: |
-          pnpm lint
+          pnpm test
