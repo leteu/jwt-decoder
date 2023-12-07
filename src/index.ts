@@ -13,9 +13,7 @@ function decodeToken<T = unknown>(token: string): T {
   }
 
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
-  const JSONToken = JSON.parse(
-    Buffer.from(base64, 'base64').toString()
-  )
+  const JSONToken = JSON.parse(Buffer.from(base64, 'base64').toString())
 
   return JSONToken
 }
