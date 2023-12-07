@@ -5,28 +5,49 @@ on:
     branches: [main]
   push:
     branches: [main]
+  workflow_call:
 
 jobs:
-  lint:
-    runs-on: ubuntu-18.04
-    name: Linting
+  prepare:
+    runs-on: ubuntu-latest
+    name: Prepare Job
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
 
       - name: Setup node
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: pnpm
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: |
           pnpm i
 
+  lint:
+    runs-on: ubuntu-latest
+    needs: [prepare]
+    name: Linting
+    steps:
       - name: Check style
         run: |
           pnpm prettier
@@ -34,26 +55,12 @@ jobs:
       - name: LINTing
         run: |
           pnpm lint
+
   test:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
+    needs: [prepare]
     name: Testing
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-
-      - name: Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: pnpm
-
-      - name: Install dependencies
-        run: |
-          pnpm i
-
       - name: Test
         run: |
           pnpm test
