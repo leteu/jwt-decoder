@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest'
 import { decodeToken } from '../src/index'
 
-describe('sum module', () => {
+describe('decodeToken module', () => {
   test('full jwt', () => {
     expect(
       decodeToken(
