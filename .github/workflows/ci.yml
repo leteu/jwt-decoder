@@ -1,16 +1,15 @@
-name: Code Quality
+name: CI
 
 on:
   pull_request:
     branches: [main]
   push:
     branches: [main]
-  workflow_call:
 
 jobs:
-  prepare:
+  lint:
     runs-on: ubuntu-latest
-    name: Prepare Job
+    name: Linting
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,8 +30,8 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
         with:
           path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -43,11 +42,6 @@ jobs:
         run: |
           pnpm i
 
-  lint:
-    runs-on: ubuntu-latest
-    needs: [prepare]
-    name: Linting
-    steps:
       - name: Check style
         run: |
           pnpm prettier
@@ -58,9 +52,39 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    needs: [prepare]
     name: Testing
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: |
+          pnpm i
+
       - name: Test
         run: |
           pnpm test
